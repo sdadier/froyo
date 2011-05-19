@@ -1,0 +1,22 @@
+Custom kernel for GT-I5800 (Linux 2.6.32.9)
+
+Root ADB
+own busybox 1.19
+TUN support
+No more RFS at all (if you want) (nearly, /efs stay rfs)
+Compcache support
+CIFS support
+NFS modules
+Security fixes
+TinyRCU (default)
+SIO Simple I/O scheduler (default)
+BFQ (info : http://algo.ing.unimo.it/people/paolo/disk_sched/)
+Autogroup scheduler patch v4
+jhash3 patch
+Support for early startup scripts (/system/etc/init.d)
+Filesystems: rfs, ext2, ext3, ext4, btrfs, jfs, reiserfs
+Support /data to sdcard
+Support 1% battery steps mod
+Support UV and pimpmycpu app.
+Voodoo Sound v8
+Overclock 800Mhz (no voltage raised)
