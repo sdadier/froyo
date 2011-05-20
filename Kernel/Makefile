@@ -182,8 +182,8 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ \
 export KBUILD_BUILDHOST := $(SUBARCH)
 ARCH		:= arm
 #CROSS_COMPILE   := /opt/ds5/bin/arm-none-linux-gnueabi-
-CROSS_COMPILE   := /opt/toolchains/arm-2010q1/bin/arm-none-eabi-
-#CROSS_COMPILE   := /opt/toolchains/arm-2011.03/bin/arm-none-eabi-
+#CROSS_COMPILE   := /opt/toolchains/arm-2010q1/bin/arm-none-eabi-
+CROSS_COMPILE   := /opt/toolchains/arm-2011.03/bin/arm-none-eabi-
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -350,6 +350,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-delete-null-pointer-checks \
                    -fsingle-precision-constant \
 #                        -mcpu=arm1176jzf-s \
+			-mtune=arm1176jzf-s \
                         -march=armv6tej \
                         -ffast-math \
                         -pipe \
@@ -358,7 +359,12 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
                         -fno-gcse \
                         -mfpu=vfp \
                         -fno-tree-vectorize \
-                        -fprefetch-loop-arrays 
+                        -fprefetch-loop-arrays \
+                                --param l2-cache-size=16 \
+                                --param l1-cache-size=16 \
+                                --param simultaneous-prefetches=6 \
+                                --param prefetch-latency=400 \
+                                --param l1-cache-line-size=64
 
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 

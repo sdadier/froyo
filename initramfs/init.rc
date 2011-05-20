@@ -674,8 +674,6 @@ service dumpstate /system/bin/dumpstate -s
     disabled
     oneshot
 
-fugu_nilfs
-
 # to enable wifi
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd

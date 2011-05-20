@@ -105,16 +105,16 @@ static struct cpufreq_frequency_table freq_table_666_166MHz[] = {
 static unsigned char transition_state_666_166MHz[][2] = {
         {1, 0},
         {2, 0},
-        {3, 1},
+        {3, 0},
 #ifdef SYSCLK_CHANGE
 #ifdef USE_DVFS_AL1_LEVEL
-        {4, 5},
-        {5, 6},
-        {5, 4},
+        {4, 1},
+        {5, 2},
+        {6, 4},
         {6, 5},
 #else /* USE_DVFS_AL1_LEVEL */
-        {4, 2},
-        {5, 3},
+        {4, 3},
+        {5, 4},
 #endif /* USE_DVFS_AL1_LEVEL */
 #else /* SYSCLK_CHANGE */
         {3, 2},
@@ -214,11 +214,10 @@ void set_dvfs_perf_level(void)
 	//spin_lock(&dvfs_lock);
 	unsigned long flag;	
 	if(spin_trylock_irqsave(&dvfs_lock,flag)) {	
-
-	/* if some user event (keypad, touchscreen) occur, freq will be raised to 532MHz */
-	/* maximum frequency :532MHz(0), 266MHz(1) */
-	s5p6442_cpufreq_index = 0;
-	dvfs_change_quick = 1;
+		/* if some user event (keypad, touchscreen) occur, freq will be raised to 532MHz */
+		/* maximum frequency :532MHz(0), 266MHz(1) */
+		s5p6442_cpufreq_index = 0;
+		dvfs_change_quick = 1;
 	spin_unlock_irqrestore(&dvfs_lock,flag);
 	}
 }
@@ -347,7 +346,6 @@ unsigned int s5p6442_target_frq(unsigned int pred_freq,
 	struct cpufreq_frequency_table *freq_tab = s5p6442_freq_table[S5P6442_FREQ_TAB];
 
 	spin_lock(&dvfs_lock);
-
 	if(freq_tab[0].frequency < pred_freq) {
 	   index = 0;	
 	   goto s5p6442_target_frq_end;

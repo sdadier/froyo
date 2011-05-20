@@ -129,7 +129,7 @@ static const u32 s5p_cpu_clk_tab_666_166MHz[][10] = {
 };
 
 u32 s5p_cpu_pll_tab[][2] = { 
-{((1 << 31) | (400 << 16) | (3 << 8) | 1), ((1 << 31) | (333 << 16) | (3 << 8) | 3)}, 
+{((1 << 31) | (800 << 16) | (6 << 8) | 1), ((1 << 31) | (333 << 16) | (3 << 8) | 3)}, 
 {((1 << 31) | (667 << 16) | (6 << 8) | 1), ((1 << 31) | (333 << 16) | (3 << 8) | 3)},
 {((1 << 31) | (667 << 16) | (6 << 8) | 1), ((1 << 31) | (333 << 16) | (3 << 8) | 3)},
 {((1 << 31) | (667 << 16) | (6 << 8) | 1), ((1 << 31) | (333 << 16) | (3 << 8) | 3)},
@@ -274,14 +274,6 @@ int s5p6442_clk_set_rate(unsigned int target_freq,
 		cur_idx = 3;
 	}
 
-	//printk("---> s5p6442 target : freq = %d, index = %d, cur_idx = %d\n", target_freq, index, cur_idx);
-	if (cur_idx != index) {	
-		 __raw_writel(0xe10, S5P_APLL_LOCK);
-		__raw_writel(s5p_cpu_pll_tab[index][0],S5P_APLL_CON);
-	}
-	else
-		return 0;
-
 	cpu_clk_tab = s5p_cpu_clk_tab[S5P6442_FREQ_TAB];
 
 	size = s5p_cpu_clk_tab_size();
@@ -360,6 +352,10 @@ int s5p6442_clk_set_rate(unsigned int target_freq,
 #endif /* MUXD0D1_A2M */
 
 	s5p6442_changeDivider(clk_div0, S5P_CLK_DIV0);
+	
+	s5p6442_preclock();
+	__raw_writel(s5p_cpu_pll_tab[index][0],S5P_APLL_CON);
+	s5p6442_postclock();
 	
 	if(cpu_clk_tab[index][6] == 0)
 		__raw_writel(s5p_avg_prd_refresh_rate[S5P6442_FREQ_TAB * 2], S5P_DRAMC_TIMINGAREF);

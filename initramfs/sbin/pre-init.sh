@@ -27,7 +27,7 @@
 # authors and should not be interpreted as representing official policies, either expressed
 # or implied, of Renaud Allard.
 
-VERSION=2.4.beta2
+VERSION=2.4.beta3
 FUGUDIR=/fugumod_sd/Android/data/fugumod
 
 DATA2SD=

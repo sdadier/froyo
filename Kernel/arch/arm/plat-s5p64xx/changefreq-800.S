@@ -21,7 +21,7 @@
 
 	.text
 
-ENTRY(s5p6442_clock800)
+ENTRY(s5p6442_preclock)
 
 	stmfd	sp!, {r0-r8, r14}
 
@@ -33,40 +33,13 @@ ENTRY(s5p6442_clock800)
         /* Set Lock Time */
         ldr     r1, =0xe10                      @ Locktime : 0xe10 = 3600
         str     r1, [r8, #0x000]                @ APLL_LOCK
-
-	ldr	r1, =((1 << 31) | (833 << 16) | (6 << 8) | 1)
-	str	r1, [r8, #0x100]
-
-        /* Set Source Clock */
-        ldr     r1, =0x00001111                    @ A, M, E, VPLL Muxing
-        str     r1, [r8, #0x200]                @ CLK_SRC0
- 
-        /* wait at least 200us to stablize all clock */
-        mov     r2, #0x10000
-1:      subs    r2, r2, #1
-        bne     1b
- 
-	bl		System_DisableBP
-	bl		System_EnableIRQ
 
 	ldmfd   	sp!, {r0-r8, r14}
 	bx		lr
 
-ENTRY(s5p6442_clock667)
+ENTRY(s5p6442_postclock)
 
 	stmfd	sp!, {r0-r8, r14}
-
-	bl		System_DisableIRQ
-	bl		System_EnableBP
-
-        ldr     r8, =S3C_VA_SYS		         @ 0xE0100000
- 
-        /* Set Lock Time */
-        ldr     r1, =0xe10                      @ Locktime : 0xe10 = 3600
-        str     r1, [r8, #0x000]                @ APLL_LOCK
-
-	ldr	r1, =((1 << 31) | (667 << 16) | (6 << 8) | 1)
-	str	r1, [r8, #0x100]
 
         /* Set Source Clock */
         ldr     r1, =0x00001111                    @ A, M, E, VPLL Muxing

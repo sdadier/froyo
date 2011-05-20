@@ -35,8 +35,6 @@
 int *FakeShmoo_UV_mV_Ptr; // Stored voltage table from cpufreq sysfs
 //extern NvRmCpuShmoo fake_CpuShmoo;  // Stored faked CpuShmoo values
 //extern NvRmDfs *fakeShmoo_Dfs;
-extern u32 s5p_cpu_pll_tab[][4];
-
 #endif // USE_FAKE_SHMOO
 
 #define dprintk(msg...) cpufreq_debug_printk(CPUFREQ_DEBUG_CORE, \

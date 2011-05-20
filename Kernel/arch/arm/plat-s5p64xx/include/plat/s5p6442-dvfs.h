@@ -86,9 +86,12 @@ extern void s5p6442_changeDivider(u32, u32);
 extern unsigned int frequency_match_666_166MHz[][4];
 
 #ifdef CONFIG_800MHZ_EDITION
-extern void s5p6442_clock800(void);
 #ifndef CONFIG_BLEEDING_EDGE
-extern void s5p6442_clock667(void);
+extern void s5p6442_preclock(void);
+extern void s5p6442_postclock(void);
+extern u32 s5p_cpu_pll_tab[][2];
+#else
+extern void s5p6442_clock800(void);
 #endif
 #endif
 

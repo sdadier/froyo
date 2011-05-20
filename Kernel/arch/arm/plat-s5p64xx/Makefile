@@ -58,7 +58,7 @@ endif
 else
 obj-$(CONFIG_CPU_S5P6442_CLOCK)	+= s5p6442-clock.o
 obj-$(CONFIG_CPU_FREQ)         += s5p6442-dvfs-800.o changefreq-800.o
-obj-$(CONFIG_PM)                += pm.o
+obj-$(CONFIG_PM)                += pm-800.o
 endif
 else
 obj-$(CONFIG_CPU_S5P6442_CLOCK)	+= s5p6442-clock.o

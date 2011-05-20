@@ -1822,8 +1822,8 @@ static int __cpufreq_set_policy(struct cpufreq_policy *data,
 	int ret = 0;
 
 	cpufreq_debug_disable_ratelimit();
-	dprintk("setting new policy for CPU %u: %u - %u kHz\n", policy->cpu,
-		policy->min, policy->max);
+//	dprintk("setting new policy for CPU %u: %u - %u kHz\n", policy->cpu,
+//		policy->min, policy->max);
 
 	memcpy(&policy->cpuinfo, &data->cpuinfo,
 				sizeof(struct cpufreq_cpuinfo));
@@ -1859,8 +1859,8 @@ static int __cpufreq_set_policy(struct cpufreq_policy *data,
 	data->min = policy->min;
 	data->max = policy->max;
 
-	dprintk("new min and max freqs are %u - %u kHz\n",
-					data->min, data->max);
+//	dprintk("new min and max freqs are %u - %u kHz\n",
+//					data->min, data->max);
 
 	if (cpufreq_driver->setpolicy) {
 		data->policy = policy->policy;
